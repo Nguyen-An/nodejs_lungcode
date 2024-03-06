@@ -14,12 +14,14 @@ Book.get_all = (callback) => {
 
 Book.get_by_id = (id, callback)  => {
     db.query("select * from Book WHERE id = ?", id, (err, book) => {
-        (err || book.len) ? callback(null) : callback(book[0])
+        (err || book.length) ? callback(null) : callback(book[0])
     })
 }
 
 Book.create = (data, callback) => { 
-    callback(data)
+    db.query("INSERT INTO Book SET ?", data, (err, book) => { 
+        (err || book.length) ? callback(null) : callback({id: book})
+    })
 }
 
 Book.remove = (id, callback) => { 
