@@ -5,6 +5,7 @@ const _AuthMiddleWare = require('./app/common/_AuthMiddleWare')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
+require('./app/routers/account.router')(app);
 require('./app/routers/home.router')(app);
 app.use(_AuthMiddleWare.isAuth);
 require('./app/routers/book.router')(app);
